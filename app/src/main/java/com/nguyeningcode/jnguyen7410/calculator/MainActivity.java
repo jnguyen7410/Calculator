@@ -106,6 +106,26 @@ public class MainActivity extends AppCompatActivity {
         buttonMultiply.setOnClickListener(opListener);
         buttonMinus.setOnClickListener(opListener);
         buttonPlus.setOnClickListener(opListener);
+
+        Button buttonNeg = (Button) findViewById(R.id.buttonNeg);
+        View.OnClickListener negListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button b = (Button) view;
+                String value = newNumber.getText().toString();
+                if (value.length() == 0) {
+                    newNumber.setText("-");
+                } else {
+                    try {
+                        Double doubleValue = Double.valueOf(value);
+                        newNumber.setText(Double.toString(doubleValue * -1));
+                    } catch (NumberFormatException e) {
+                        newNumber.setText("");
+                    }
+                }
+            }
+        };
+        buttonNeg.setOnClickListener(negListener);
     }
 
     private void performOperation(Double value, String operation) {
